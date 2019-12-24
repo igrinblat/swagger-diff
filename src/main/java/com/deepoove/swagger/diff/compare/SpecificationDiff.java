@@ -107,6 +107,7 @@ public class SpecificationDiff extends ChangedExtensionGroup {
 				propertyDiff.diff(oldResponseProperty, newResponseProperty);
 				changedOperation.setAddProps(propertyDiff.getIncreased());
 				changedOperation.setMissingProps(propertyDiff.getMissing());
+				changedOperation.setChangedProps(propertyDiff.getChanged());
 
 				changedOperation.putSubGroup("responses",
 					extDiffer.diffResGroup(oldOperation.getResponses(), newOperation.getResponses()));

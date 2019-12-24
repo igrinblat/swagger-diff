@@ -76,12 +76,12 @@ public class ChangedOperation extends ChangedExtensionGroup implements Changed {
 
 	public boolean isDiff() {
 		return !addParameters.isEmpty() || !missingParameters.isEmpty()
-				|| !changedParameter.isEmpty() || !addProps.isEmpty()
-				|| !missingProps.isEmpty() || vendorExtensionsAreDiff();
+				|| !changedParameter.isEmpty() || isDiffProp() || vendorExtensionsAreDiff();
 	}
 	public boolean isDiffProp(){
 		return !addProps.isEmpty()
 				|| !missingProps.isEmpty()
+				|| !changedProps.isEmpty()
 				|| propVendorExtsAreDiff();
 	}
 
@@ -97,5 +97,4 @@ public class ChangedOperation extends ChangedExtensionGroup implements Changed {
 		return !addParameters.isEmpty() || !missingParameters.isEmpty()
 				|| !changedParameter.isEmpty();
 	}
-
 }
