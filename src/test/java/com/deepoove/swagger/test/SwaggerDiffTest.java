@@ -1,22 +1,22 @@
 package com.deepoove.swagger.test;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.deepoove.swagger.diff.SwaggerDiff;
 import com.deepoove.swagger.diff.model.ChangedEndpoint;
 import com.deepoove.swagger.diff.model.ChangedOperation;
 import com.deepoove.swagger.diff.model.ChangedExtensionGroup;
 import com.deepoove.swagger.diff.model.Endpoint;
 import com.deepoove.swagger.diff.output.HtmlRender;
+import com.deepoove.swagger.diff.output.JsonRender;
 import com.deepoove.swagger.diff.output.MarkdownRender;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import io.swagger.models.HttpMethod;
 
@@ -26,6 +26,15 @@ public class SwaggerDiffTest {
 	final String SWAGGER_V2_DOC2 = "petstore_v2_2.json";
 	final String SWAGGER_V2_EMPTY_DOC = "petstore_v2_empty.json";
 	final String SWAGGER_V2_HTTP = "http://petstore.swagger.io/v2/swagger.json";
+	final String SWAGGER_V2_RESPONSE_NEW_MANDATORY_DOC1 = "response-changed/petstore_v2_1.yaml";
+    final String SWAGGER_V2_RESPONSE_NEW_MANDATORY_DOC2 = "response-changed/petstore_v2_2.yaml";
+
+	@Test
+    public void testResponseNewMandatoryProperty(){
+        SwaggerDiff diff = SwaggerDiff.compareV2(SWAGGER_V2_RESPONSE_NEW_MANDATORY_DOC1, SWAGGER_V2_RESPONSE_NEW_MANDATORY_DOC2);
+        List<ChangedEndpoint> changedEndPoints = diff.getChangedEndpoints();
+        Assert.assertFalse(changedEndPoints.isEmpty());
+    }
 
 	@Test
 	public void testEqual() {
@@ -151,6 +160,23 @@ public class SwaggerDiffTest {
 		}
 
 	}
+
+
+	@Test
+	public void testJsonRender() {
+		SwaggerDiff diff = SwaggerDiff.compareV2(SWAGGER_V2_DOC1, SWAGGER_V2_DOC2);
+		String render = new JsonRender().render(diff);
+		try {
+			FileWriter fw = new FileWriter(
+					"testDiff.json");
+			fw.write(render);
+			fw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	private void assertEqual(SwaggerDiff diff) {
 		List<Endpoint> newEndpoints = diff.getNewEndpoints();

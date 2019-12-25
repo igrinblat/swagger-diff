@@ -73,7 +73,7 @@ public class SwaggerDiff {
      *            new Swagger specification document in v2.0 format as a JsonNode
      */
     public static SwaggerDiff compareV2(JsonNode oldSpec, JsonNode newSpec) {
-        return compareV2(oldSpec, newSpec, false);
+        return compareV2(oldSpec, newSpec, true);
     }
 
     public static SwaggerDiff compareV2(JsonNode oldSpec, JsonNode newSpec, boolean withExtensions) {
@@ -110,6 +110,7 @@ public class SwaggerDiff {
         if (null == oldSpecSwagger || null == newSpecSwagger) { throw new RuntimeException(
                 "cannot read api-doc from spec."); }
     }
+
 
     private SwaggerDiff(JsonNode oldSpec, JsonNode newSpec) {
         SwaggerParser swaggerParser = new SwaggerParser();
