@@ -57,7 +57,7 @@ public class SwaggerDiff {
      *            new api-doc location:Json or Http
      */
     public static SwaggerDiff compareV2(String oldSpec, String newSpec) {
-        return compareV2(oldSpec, newSpec, false);
+        return compareV2(oldSpec, newSpec, true);
     }
 
     public static SwaggerDiff compareV2(String oldSpec, String newSpec, boolean withExtensions) {
