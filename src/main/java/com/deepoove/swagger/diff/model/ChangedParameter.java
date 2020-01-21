@@ -3,6 +3,7 @@ package com.deepoove.swagger.diff.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.models.Model;
 import io.swagger.models.parameters.Parameter;
 
 public class ChangedParameter extends ChangedExtensionGroup implements Changed {
@@ -17,6 +18,9 @@ public class ChangedParameter extends ChangedExtensionGroup implements Changed {
 	private boolean isChangeRequired;
 	// private boolean isChangeType;
 	private boolean isChangeDescription;
+
+	private Model rightRefDiffModel;
+	private Model leftRefDiffModel;
 
 	public boolean isChangeRequired() {
 		return isChangeRequired;
@@ -81,5 +85,21 @@ public class ChangedParameter extends ChangedExtensionGroup implements Changed {
 
 	public void setChanged(List<ElProperty> changed) {
 		this.changed = changed;
+	}
+
+	public void setRightRefDiffModel(Model rightModel) {
+		rightRefDiffModel = rightModel;
+	}
+
+	public Model getRightRefDiffModel() {
+		return rightRefDiffModel;
+	}
+
+	public void setLeftRefDiffModel(Model leftModel) {
+		leftRefDiffModel = leftModel;
+	}
+
+	public Model getLeftRefDiffModel() {
+		return leftRefDiffModel;
 	}
 }

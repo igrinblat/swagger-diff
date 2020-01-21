@@ -77,6 +77,9 @@ public class ParameterDiff {
 					changedParameter.setIncreased(diff.getIncreased());
 					changedParameter.setMissing(diff.getMissing());
 					changedParameter.setChanged(diff.getChanged());
+
+					changedParameter.setLeftRefDiffModel(leftModel);
+					changedParameter.setRightRefDiffModel(rightModel);
 				}
 			}
 
