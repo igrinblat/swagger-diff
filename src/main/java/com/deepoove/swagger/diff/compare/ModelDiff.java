@@ -83,7 +83,7 @@ public class ModelDiff {
             } else if (left != null && right != null && !left.equals(right)) {
                 // Add a changed ElProperty if not a Reference
                 // Useless
-                changed.add(convert2ElProperty(key, parentEl, left));
+                changed.add(convert2ElProperty(key, parentEl, left, right));
             }
         });
         return this;
@@ -97,19 +97,24 @@ public class ModelDiff {
 
         for (Entry<String, Property> entry : propMap.entrySet()) {
             // TODO Recursively get the properties
-            result.add(convert2ElProperty(entry.getKey(), parentEl, entry.getValue()));
+            result.add(convert2ElProperty(entry.getKey(), parentEl, entry.getValue() ));
         }
         return result;
+    }
+
+    private ElProperty convert2ElProperty(String key, String parentEl, Property value) {
+        return convert2ElProperty(key,parentEl,value, null);
     }
 
     private String buildElString(String parentEl, String propName) {
         return null == parentEl ? propName : (parentEl + "." + propName);
     }
 
-    private ElProperty convert2ElProperty(String propName, String parentEl, Property property) {
+    private ElProperty convert2ElProperty(String propName, String parentEl, Property property, Property newProperty) {
         ElProperty pWithPath = new ElProperty();
         pWithPath.setProperty(property);
         pWithPath.setEl(buildElString(parentEl, propName));
+        pWithPath.setNewProperty(newProperty);
         return pWithPath;
     }
 

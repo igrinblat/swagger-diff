@@ -13,6 +13,16 @@ public class ElProperty extends ChangedExtensionGroup {
 
 	private Property property;
 
+	private Property newProperty;
+
+	public Property getNewProperty() {
+		return newProperty;
+	}
+
+	public void setNewProperty(Property newProperty) {
+		this.newProperty = newProperty;
+	}
+
 	public Property getProperty() {
 		return property;
 	}
